@@ -7,16 +7,26 @@ const port = 3000;
 
 const source = "https://n8n-apps.nlabshealth.com/webhook/data-5dYbrVSlMVJxfmco";
 
+let decrypted = null;
+
 app.get("/", async (req, res) => {
+  if (decrypted) {
+    res.json(decrypted);
+    return;
+  }
+
   const response = await fetch(source);
 
   if (!response.ok) {
     res.status(503);
-  } else {
-    const body = await response.json();
-
-    res.send(decrypt(body.data));
+    return;
   }
+
+  const body = await response.json();
+
+  decrypted = decrypt(body.data);
+
+  res.json(decrypted);
 });
 
 app.listen(port, () => {

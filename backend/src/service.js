@@ -18,7 +18,7 @@ function decrypt(data) {
   );
   decrypted += decipher.final("utf8");
 
-  return decrypted;
+  return JSON.parse(decrypted);
 }
 
 module.exports = {
