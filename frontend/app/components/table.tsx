@@ -16,8 +16,8 @@ export function Table({ users }: Props) {
 
   return (
     <div className="container mx-auto mt-8 space-y-8">
-      <div className="flex justify-between items-center p-6 bg-white rounded-md shadow">
-        <h1 className="text-2xl font-medium">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-3 md:gap-0 p-6 bg-white rounded-md shadow">
+        <h1 className="text-center md:text-start text-xl md:text-2xl font-medium">
           H&W Decrypt - Fullstack Technical Test
         </h1>
         <div className="space-x-3">
