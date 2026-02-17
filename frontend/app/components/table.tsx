@@ -22,7 +22,7 @@ export function Table({ users }: Props) {
 
   return (
     <div className="container mx-auto mt-8 space-y-8">
-      <div className="flex justify-between items-center p-6 bg-secondary rounded">
+      <div className="flex justify-between items-center p-6 bg-white rounded-md shadow">
         <h1 className="text-2xl font-medium">
           H&W Decrypt - Fullstack Technical Test
         </h1>
@@ -37,7 +37,7 @@ export function Table({ users }: Props) {
           </Button>
         </div>
       </div>
-      <main className="bg-secondary rounded shadow p-6">
+      <main className="bg-white p-6 rounded-md shadow">
         <DataTable columns={columns} data={data} />
       </main>
     </div>
