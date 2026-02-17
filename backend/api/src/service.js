@@ -1,6 +1,7 @@
 const crypto = require("crypto");
 
 const persistWebhook = "http://localhost:5678/webhook-test/persist";
+const cleanWebhook = "http://localhost:5678/webhook-test/clean";
 
 function decrypt(data) {
   const { algorithm, secretKey, encrypted } = data;
@@ -24,7 +25,7 @@ function decrypt(data) {
 }
 
 function persist(data) {
-  fetch(persistWebhook, {
+  return fetch(persistWebhook, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -33,7 +34,14 @@ function persist(data) {
   });
 }
 
+function clean() {
+  return fetch(cleanWebhook, {
+    method: "DELETE",
+  });
+}
+
 module.exports = {
   decrypt,
   persist,
+  clean,
 };

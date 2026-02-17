@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { decrypt, persist } = require("./service");
+const { decrypt, persist, clean } = require("./service");
 
 const app = express();
 const port = 3000;
@@ -26,9 +26,17 @@ app.get("/", async (req, res) => {
 
   decrypted = decrypt(body.data);
 
-  persist(decrypted);
+  persist(decrypted).then(() => {
+    res.json(decrypted);
+  });
+});
 
-  res.json(decrypted);
+app.delete("/clean", (req, res) => {
+  clean().then(() => {
+    decrypted = null;
+
+    res.send();
+  });
 });
 
 app.listen(port, () => {
