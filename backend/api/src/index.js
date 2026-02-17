@@ -9,6 +9,8 @@ const port = 3000;
 
 const encryptedSource = process.env.ENCRYPTED_SOURCE;
 
+console.log(encryptedSource);
+
 let decrypted = null;
 
 app.get("/decrypt", async (req, res) => {
@@ -32,7 +34,7 @@ app.get("/decrypt", async (req, res) => {
   });
 });
 
-app.delete("decrypted", (req, res) => {
+app.delete("/decrypted", (req, res) => {
   clean().then(() => {
     decrypted = null;
 
