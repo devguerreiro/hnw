@@ -2,6 +2,7 @@ const crypto = require("crypto");
 
 const persistWebhook = process.env.PERSIST_WEBHOOK;
 const cleanWebhook = process.env.CLEAN_WEBHOOK;
+const fetchWebhook = process.env.FETCH_WEBHOOK;
 
 function decrypt(data) {
   const { algorithm, secretKey, encrypted } = data;
@@ -40,8 +41,13 @@ function clean() {
   });
 }
 
+function getDecrypted() {
+  return fetch(fetchWebhook);
+}
+
 module.exports = {
   decrypt,
   persist,
   clean,
+  getDecrypted,
 };

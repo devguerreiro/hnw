@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 
-const { decrypt, persist, clean } = require("./service");
+const { decrypt, persist, clean, getDecrypted } = require("./service");
 
 const app = express();
 const port = 3000;
@@ -12,11 +12,6 @@ const encryptedSource = process.env.ENCRYPTED_SOURCE;
 let decrypted = null;
 
 app.get("/decrypt", async (req, res) => {
-  if (decrypted) {
-    res.json(decrypted);
-    return;
-  }
-
   const encryptedResponse = await fetch(encryptedSource);
   if (!encryptedResponse.ok) {
     res.status(503);
@@ -43,6 +38,23 @@ app.delete("/decrypted", (req, res) => {
 
     res.send();
   });
+});
+
+app.get("/decrypted", async (req, res) => {
+  if (decrypted) {
+    res.json(decrypted);
+    return;
+  }
+
+  const response = await getDecrypted();
+
+  try {
+    decrypted = await response.json();
+
+    res.json(decrypted);
+  } catch (err) {
+    res.json([]);
+  }
 });
 
 app.listen(port, () => {
