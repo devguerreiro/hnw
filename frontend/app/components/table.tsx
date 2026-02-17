@@ -2,12 +2,10 @@
 
 import { useState } from "react";
 
-import { EraserIcon, PlayIcon } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-
 import { DataTable } from "./data-table";
 import { columns, User } from "./columns";
+import { ExecuteButton } from "./execute-button";
+import { CleanButton } from "./clean-button";
 
 type Props = {
   users: User[];
@@ -16,10 +14,6 @@ type Props = {
 export function Table({ users }: Props) {
   const [data, setData] = useState(users);
 
-  function execute() {}
-
-  function clean() {}
-
   return (
     <div className="container mx-auto mt-8 space-y-8">
       <div className="flex justify-between items-center p-6 bg-white rounded-md shadow">
@@ -27,14 +21,8 @@ export function Table({ users }: Props) {
           H&W Decrypt - Fullstack Technical Test
         </h1>
         <div className="space-x-3">
-          <Button onClick={execute}>
-            <PlayIcon />
-            Execute
-          </Button>
-          <Button onClick={clean}>
-            <EraserIcon />
-            Clear
-          </Button>
+          <ExecuteButton onFinish={(data) => setData(data)} />
+          <CleanButton onFinish={() => setData([])} />
         </div>
       </div>
       <main className="bg-white p-6 rounded-md shadow">

@@ -1,3 +1,3 @@
 export function DELETE() {
-  return fetch("http://localhost:3000/decrypted", { method: "DELETE" });
+  return fetch(process.env.BACKEND_URL + "/decrypted", { method: "DELETE" });
 }

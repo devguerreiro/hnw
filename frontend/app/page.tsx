@@ -1,9 +1,11 @@
-import { decrypt } from "@/services/decrypt";
-
 import { Table } from "./components/table";
 
 export default async function Home() {
-  const data = await decrypt();
+  const response = await fetch(process.env.BACKEND_URL + "/decrypted");
+
+  if (!response.ok) return;
+
+  const data = await response.json();
 
   return <Table users={data} />;
 }

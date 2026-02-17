@@ -1,5 +1,3 @@
-import { decrypt } from "@/services/decrypt";
-
-export async function GET() {
-  return Response.json(await decrypt());
+export function GET() {
+  return fetch(process.env.BACKEND_URL + "/decrypt");
 }
