@@ -1,5 +1,7 @@
 const crypto = require("crypto");
 
+const persistWebhook = "http://localhost:5678/webhook-test/persist";
+
 function decrypt(data) {
   const { algorithm, secretKey, encrypted } = data;
   const { iv, authTag, encrypted: encryptedText } = encrypted;
@@ -21,6 +23,17 @@ function decrypt(data) {
   return JSON.parse(decrypted);
 }
 
+function persist(data) {
+  fetch(persistWebhook, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+}
+
 module.exports = {
   decrypt,
+  persist,
 };
