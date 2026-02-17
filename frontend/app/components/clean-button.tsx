@@ -16,6 +16,7 @@ export function CleanButton({ onFinish }: Props) {
   function clean() {
     startTransition(async () => {
       const response = await fetch("/api/clean", { method: "DELETE" });
+
       if (response.ok) {
         onFinish();
       }
