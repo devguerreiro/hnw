@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 
-const persistWebhook = "http://localhost:5678/webhook-test/persist";
-const cleanWebhook = "http://localhost:5678/webhook-test/clean";
+const persistWebhook = process.env.PERSIST_WEBHOOK;
+const cleanWebhook = process.env.CLEAN_WEBHOOK;
 
 function decrypt(data) {
   const { algorithm, secretKey, encrypted } = data;

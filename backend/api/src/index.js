@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 
 const { decrypt, persist, clean } = require("./service");
@@ -5,12 +7,11 @@ const { decrypt, persist, clean } = require("./service");
 const app = express();
 const port = 3000;
 
-const encryptedSource =
-  "https://n8n-apps.nlabshealth.com/webhook/data-5dYbrVSlMVJxfmco";
+const encryptedSource = process.env.ENCRYPTED_SOURCE;
 
 let decrypted = null;
 
-app.get("/", async (req, res) => {
+app.get("/decrypt", async (req, res) => {
   if (decrypted) {
     res.json(decrypted);
     return;
@@ -31,7 +32,7 @@ app.get("/", async (req, res) => {
   });
 });
 
-app.delete("/clean", (req, res) => {
+app.delete("decrypted", (req, res) => {
   clean().then(() => {
     decrypted = null;
 
