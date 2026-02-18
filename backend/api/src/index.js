@@ -27,17 +27,17 @@ app.get("/decrypt", async (req, res) => {
     phone: d.telefone,
   }));
 
-  persist(decrypted).then(() => {
-    res.json(decrypted);
-  });
+  await persist(decrypted);
+
+  res.json(decrypted);
 });
 
-app.delete("/decrypted", (req, res) => {
-  clean().then(() => {
-    decrypted = null;
+app.delete("/decrypted", async (req, res) => {
+  await clean();
 
-    res.send();
-  });
+  decrypted = null;
+
+  res.send();
 });
 
 app.get("/decrypted", async (req, res) => {
