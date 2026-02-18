@@ -1,7 +1,11 @@
 import { Table } from "./components/table";
 
 export default async function Home() {
-  const response = await fetch(process.env.BACKEND_URL + "/decrypted");
+  const response = await fetch(process.env.BACKEND_URL + "/decrypted", {
+    next: {
+      tags: ["decrypted"],
+    },
+  });
 
   if (!response.ok) return;
 
